@@ -3,27 +3,27 @@ export default class EditForm {
     this.data = data;
     this.jsonDB = jsonDB;
     this.formOnPage = formOnPage;
-    this.tableRowsArr = document.querySelector("table").rows;
+    this.tableRowsArr = document.querySelector("table").rows; // псевдамассив всех строк отображенных на стр
   }
 
-  onRowEdit() {
-    Array.from(this.tableRowsArr).map((row) => {
-      row.addEventListener("click", () => {
-        this.findItemInDB(row.id);
-      });
-    });
-  }
-
+  // Метод поиска выбранного элемента в БД
   findItemInDB(id) {
     let copyId = id;
     let copyData = this.data.slice();
-    copyData.map((obj) => {
+    copyData.filter((obj) => {
       if (obj["id"] === copyId) {
         this.showEditForm(obj, copyId);
       }
     });
   }
-
+  // Скр и показ формы редактирования
+  closeEditForm() {
+    document.querySelector(".form_cross").addEventListener("click", () => {
+      this.formOnPage.classList.toggle("active");
+    });
+  }
+  // "Отправка отредактированных данных"
+  // Данный метод лишь имитирует, то что данные изменились, поэтому в placeholder формы после сохр. данные отображаются из файла БД
   onSubmitEditedData(copyId) {
     document.querySelector("form").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -41,6 +41,7 @@ export default class EditForm {
     });
   }
 
+  //Метод генерации формы из найденного в бд файла
   showEditForm(obj, copyId) {
     this.formOnPage.innerHTML = `
     <form method="post">
@@ -79,9 +80,11 @@ export default class EditForm {
     this.formOnPage.classList.add("active");
   }
 
-  closeEditForm() {
-    document.querySelector(".form_cross").addEventListener("click", () => {
-      this.formOnPage.classList.toggle("active");
+  init() {
+    Array.from(this.tableRowsArr).map((row) => {
+      row.addEventListener("click", () => {
+        this.findItemInDB(row.id);
+      });
     });
   }
 }
