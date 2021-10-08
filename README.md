@@ -1,5 +1,6 @@
 # Test assginment JS developer Infotecs
 Данный репозиторий является моей реализацией тестового задания стажировочной программы Infotecs.
+https://infotecs-assignment.netlify.app/
 
 ## Цели задания 
 ![image](https://user-images.githubusercontent.com/64264723/133250350-041e3815-322c-451f-8ec1-47dab39f6f88.png)
